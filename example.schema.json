@@ -1,0 +1,279 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "react-jsonschema-form",
+  "description": "An example of a form using the react-jsonschema-form extended schema",
+  "type": "object",
+  "properties": {
+    "personalDetails": {
+      "title": "Personal details",
+      "description": "Things like your name & address",
+      "type": "object",
+      "required": [
+        "name",
+        "address"
+      ],
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "readOnly": true,
+          "x-salesforceMapping": "form.personalDetails.name",
+          "x-shouldAutoComplete": true
+        },
+        "telephone": {
+          "title": "Telephone",
+          "type": "number",
+          "minLength": 10,
+          "x-salesforceMapping": "form.personalDetails.telephone",
+          "x-shouldAutoComplete": true
+        },
+        "email": {
+          "title": "Email",
+          "type": "string",
+          "format": "email",
+          "x-salesforceMapping": "form.personalDetails.email",
+          "x-shouldAutoComplete": true
+        },
+        "shouldShowDateOfBirth": {
+          "title": "Date of birth",
+          "type": "string",
+          "enum": [
+            "yes",
+            "no"
+          ],
+          "enumNames": [
+            "Enter a date of birth",
+            "Prefer not to say"
+          ],
+          "x-salesforceMapping": "form.personalDetails.shouldShowDateOfBirth"
+        },
+        "address": {
+          "title": "Address",
+          "type": "object",
+          "required": [
+            "buildingNameNo",
+            "street",
+            "postcode"
+          ],
+          "properties": {
+            "buildingNameNo": {
+              "title": "Building Name/Number",
+              "x-salesforceMapping": "form.personalDetails.buildingNameNo"
+            },
+            "street": {
+              "title": "Street",
+              "type": "string",
+              "x-salesforceMapping": "form.personalDetails.street"
+            },
+            "postcode": {
+              "title": "Postcode",
+              "type": "string",
+              "pattern": "^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$",
+              "x-salesforceMapping": "form.personalDetails.postcode"
+            },
+            "country": {
+              "title": "Country",
+              "type": "string",
+              "enum": [
+                "GB",
+                "FRA",
+                "ITA",
+                "..."
+              ],
+              "enumNames": [
+                "United Kingdom",
+                "France",
+                "Italy",
+                "..."
+              ],
+              "x-displayAs": "typeahead",
+              "x-salesforceMapping": "form.personalDetails.country"
+            }
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "telephone"
+          ]
+        },
+        {
+          "required": [
+            "email"
+          ]
+        }
+      ],
+      "dependencies": {
+        "shouldShowDateOfBirth": {
+          "oneOf": [
+            {
+              "properties": {
+                "shouldShowDateOfBirth": {
+                  "const": "yes"
+                },
+                "dateOfBirth": {
+                  "title": "Enter your date of birth",
+                  "type": "string",
+                  "format": "date",
+                  "x-salesforceMapping": "form.personalDetails.dateOfBirth"
+                }
+              },
+              "required": [
+                "dateOfBirth"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "budget": {
+    "title": "Budget",
+    "description": "Financial information",
+    "type": "object",
+    "properties": {
+      "overview": {
+        "title": "An overview of your budget",
+        "description": "Max 200 words",
+        "type": "string",
+        "format": "textarea",
+        "x-salesforceMapping": "form.budget.overview"
+      },
+      "budgetTable": {
+        "title": "Add your budget information in the rows below",
+        "description": "You can add/remove/reorder rows as you desire",
+        "type": "array",
+        "x-salesforceMapping": "form.budget.budgetTable",
+        "items": {
+          "type": "object",
+          "required": [
+            "name",
+            "count",
+            "cost",
+            "totalCost"
+          ],
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string",
+              "x-salesforceMapping": "form.budget.budgetTable.name"
+            },
+            "count": {
+              "title": "Number (of items)",
+              "type": "integer",
+              "x-salesforceMapping": "form.budget.budgetTable.count"
+            },
+            "cost": {
+              "title": "Cost (per item)",
+              "type": "number",
+              "x-salesforceMapping": "form.budget.budgetTable.cost"
+            },
+            "totalCost": {
+              "title": "Cost (total)",
+              "type": "number",
+              "x-formula": "?",
+              "x-salesforceMapping": "form.budget.budgetTable.totalCost"
+            }
+          }
+        }
+      }
+    }
+  },
+  "animals": {
+    "title": "Proposals using animals",
+    "type": "object",
+    "properties": {
+      "isUsingAnimals": {
+        "title": "Does your proposal use animals?",
+        "type": "boolean",
+        "default": false,
+        "x-salesforceMapping": "form.animals.isUsingAnimals"
+      }
+    },
+    "dependencies": {
+      "isUsingAnimals": {
+        "oneOf": [
+          {
+            "properties": {
+              "isUsingAnimals": {
+                "const": true
+              },
+              "typeOfAnimalsUsed": {
+                "title": "What type of animals are you using?",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "cat",
+                    "dog",
+                    "primate",
+                    "other"
+                  ],
+                  "x-enumNames": [
+                    "Cat",
+                    "Dog",
+                    "Primate",
+                    "Other"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1,
+                "x-salesforceMapping": "form.animals.typeOfAnimalUsed"
+              }
+            },
+            "required": [
+              "typeOfAnimalsUsed"
+            ],
+            "dependencies": {
+              "typeOfAnimalsUsed": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "typeOfAnimalsUsed": {
+                        "not": {
+                          "const": "primate"
+                        }
+                      },
+                      "justificationForAnimals": {
+                        "title": "Explain why you are using these animals",
+                        "type": "string",
+                        "format": "textarea",
+                        "x-salesforceMapping": "form.animals.justificationForAnimals"
+                      }
+                    },
+                    "required": [
+                      "justificationForAnimals"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "typeOfAnimalUsed": {
+                        "contains": {
+                          "const": "primate"
+                        }
+                      },
+                      "typesOfPrimatesUsed": {
+                        "title": "What type of primates?",
+                        "type": "string",
+                        "enum": [
+                          "orangutan",
+                          "chimp"
+                        ],
+                        "maxItems": 1,
+                        "x-salesforceMapping": "form.animals.typesOfPrimateUsed"
+                      }
+                    },
+                    "required": [
+                      "typesOfPrimatesUsed"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
