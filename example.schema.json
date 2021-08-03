@@ -144,7 +144,7 @@
         "title": "Add your budget information in the rows below",
         "description": "You can add/remove/reorder rows as you desire",
         "type": "array",
-        "x-salesforceMapping": "form.budget.budgetTable",
+        "x-salesforceMapping": "form.budgetTable",
         "items": {
           "type": "object",
           "required": [
@@ -157,23 +157,23 @@
             "name": {
               "title": "Name",
               "type": "string",
-              "x-salesforceMapping": "form.budget.budgetTable.name"
+              "x-salesforceMapping": "form.budgetTable.name"
             },
             "count": {
               "title": "Number (of items)",
               "type": "integer",
-              "x-salesforceMapping": "form.budget.budgetTable.count"
+              "x-salesforceMapping": "form.budgetTable.count"
             },
             "cost": {
               "title": "Cost (per item)",
               "type": "number",
-              "x-salesforceMapping": "form.budget.budgetTable.cost"
+              "x-salesforceMapping": "form.budgetTable.cost"
             },
             "totalCost": {
               "title": "Cost (total)",
               "type": "number",
               "x-formula": "?",
-              "x-salesforceMapping": "form.budget.budgetTable.totalCost"
+              "x-salesforceMapping": "form.budgetTable.totalCost"
             }
           }
         }
