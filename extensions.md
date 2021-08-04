@@ -10,9 +10,11 @@ Below are the keywords, values and other elements the example schema uses to ext
 
 - x-salesforceMapping: String (default: “”) 
 
-    This will be used to provide the middleware with the context of where the value of a form field exists in Salesforce. This may be defined in two places:
-    - Within the definition of a scalar value (string, number, date, etc.). In that instance the value should be of the form `TableName.FieldName`, describing which field in which table the data should be saved in.
-    - Within the definition of an array. In that instance the value should be of the form `TableName`, describing which table the array will be saved in. The `x-salesforceMapping` of items within that array should either be on the same table, or on a table that can be related back to that table.
+    This will be used to provide the middleware with the context of where the value of a form field exists in Salesforce. It is required in three places:
+
+    - As a top-level property of the schema. In that context the value should be of the form `RootTableName`, defining the Salesforce object to which the form relates.
+    - Within the definition of an array. In that instance the value should be of the form `ArrayTableName`, describing which Salesforce object represents the array. There must be a relational mapping from `ArrayTableName` to `RootTableName`.
+    - Within the definition of a scalar value (string, number, date, etc.). In that instance the value should be of the form `ValueTableName.ValueFieldName`, defining which field in which table the data should be saved in. There must be a relational mapping from `ValueTableName` to either `RootTableName` or, if the scalar value is present in an array, `ArrayTableName`.
 
 - x-renderer: String, oneOf['password', 'rte', 'textarea', 'typeahead']` (default: null) 
 

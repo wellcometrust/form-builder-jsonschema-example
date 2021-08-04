@@ -3,6 +3,7 @@
   "title": "react-jsonschema-form",
   "description": "An example of a form using the react-jsonschema-form extended schema",
   "type": "object",
+  "x-salesforceMapping": "Application",
   "properties": {
     "personalDetails": {
       "title": "Personal details",
