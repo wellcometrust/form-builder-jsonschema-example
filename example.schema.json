@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://funding-platform.wellcome.org/id-of-example-schema",
   "title": "react-jsonschema-form",
   "description": "An example of a form using the react-jsonschema-form extended schema",
   "type": "object",
