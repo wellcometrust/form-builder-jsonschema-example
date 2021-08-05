@@ -4,6 +4,7 @@
   "title": "react-jsonschema-form",
   "description": "An example of a form using the react-jsonschema-form extended schema",
   "type": "object",
+  "x-salesforceMapping": "Application",
   "properties": {
     "personalDetails": {
       "title": "Personal details",
@@ -18,21 +19,21 @@
           "title": "Name",
           "type": "string",
           "readOnly": true,
-          "x-salesforceMapping": "form.personalDetails.name",
+          "x-salesforceMapping": "personalDetails.name",
           "x-shouldAutoComplete": true
         },
         "telephone": {
           "title": "Telephone",
           "type": "number",
           "minLength": 10,
-          "x-salesforceMapping": "form.personalDetails.telephone",
+          "x-salesforceMapping": "personalDetails.telephone",
           "x-shouldAutoComplete": true
         },
         "email": {
           "title": "Email",
           "type": "string",
           "format": "email",
-          "x-salesforceMapping": "form.personalDetails.email",
+          "x-salesforceMapping": "personalDetails.email",
           "x-shouldAutoComplete": true
         },
         "shouldShowDateOfBirth": {
@@ -46,7 +47,7 @@
             "Enter a date of birth",
             "Prefer not to say"
           ],
-          "x-salesforceMapping": "form.personalDetails.shouldShowDateOfBirth"
+          "x-salesforceMapping": "personalDetails.shouldShowDateOfBirth"
         },
         "address": {
           "title": "Address",
@@ -59,18 +60,18 @@
           "properties": {
             "buildingNameNo": {
               "title": "Building Name/Number",
-              "x-salesforceMapping": "form.personalDetails.buildingNameNo"
+              "x-salesforceMapping": "personalDetails.buildingNameNo"
             },
             "street": {
               "title": "Street",
               "type": "string",
-              "x-salesforceMapping": "form.personalDetails.street"
+              "x-salesforceMapping": "personalDetails.street"
             },
             "postcode": {
               "title": "Postcode",
               "type": "string",
               "pattern": "^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$",
-              "x-salesforceMapping": "form.personalDetails.postcode"
+              "x-salesforceMapping": "personalDetails.postcode"
             },
             "country": {
               "title": "Country",
@@ -88,7 +89,7 @@
                 "..."
               ],
               "x-displayAs": "typeahead",
-              "x-salesforceMapping": "form.personalDetails.country"
+              "x-salesforceMapping": "personalDetails.country"
             }
           }
         }
@@ -117,7 +118,7 @@
                   "title": "Enter your date of birth",
                   "type": "string",
                   "format": "date",
-                  "x-salesforceMapping": "form.personalDetails.dateOfBirth"
+                  "x-salesforceMapping": "personalDetails.dateOfBirth"
                 }
               },
               "required": [
@@ -139,13 +140,13 @@
         "description": "Max 200 words",
         "type": "string",
         "format": "textarea",
-        "x-salesforceMapping": "form.budget.overview"
+        "x-salesforceMapping": "budget.overview"
       },
       "budgetTable": {
         "title": "Add your budget information in the rows below",
         "description": "You can add/remove/reorder rows as you desire",
         "type": "array",
-        "x-salesforceMapping": "form.budget.budgetTable",
+        "x-salesforceMapping": "budgetTable",
         "items": {
           "type": "object",
           "required": [
@@ -158,23 +159,23 @@
             "name": {
               "title": "Name",
               "type": "string",
-              "x-salesforceMapping": "form.budget.budgetTable.name"
+              "x-salesforceMapping": "budgetTable.name"
             },
             "count": {
               "title": "Number (of items)",
               "type": "integer",
-              "x-salesforceMapping": "form.budget.budgetTable.count"
+              "x-salesforceMapping": "budgetTable.count"
             },
             "cost": {
               "title": "Cost (per item)",
               "type": "number",
-              "x-salesforceMapping": "form.budget.budgetTable.cost"
+              "x-salesforceMapping": "budgetTable.cost"
             },
             "totalCost": {
               "title": "Cost (total)",
               "type": "number",
               "x-formula": "?",
-              "x-salesforceMapping": "form.budget.budgetTable.totalCost"
+              "x-salesforceMapping": "budgetTable.totalCost"
             }
           }
         }
@@ -189,7 +190,7 @@
         "title": "Does your proposal use animals?",
         "type": "boolean",
         "default": false,
-        "x-salesforceMapping": "form.animals.isUsingAnimals"
+        "x-salesforceMapping": "animals.isUsingAnimals"
       }
     },
     "dependencies": {
@@ -220,7 +221,7 @@
                 },
                 "uniqueItems": true,
                 "minItems": 1,
-                "x-salesforceMapping": "form.animals.typeOfAnimalUsed"
+                "x-salesforceMapping": "animals.typeOfAnimalUsed"
               }
             },
             "required": [
@@ -240,7 +241,7 @@
                         "title": "Explain why you are using these animals",
                         "type": "string",
                         "format": "textarea",
-                        "x-salesforceMapping": "form.animals.justificationForAnimals"
+                        "x-salesforceMapping": "animals.justificationForAnimals"
                       }
                     },
                     "required": [
@@ -262,7 +263,7 @@
                           "chimp"
                         ],
                         "maxItems": 1,
-                        "x-salesforceMapping": "form.animals.typesOfPrimateUsed"
+                        "x-salesforceMapping": "animals.typesOfPrimateUsed"
                       }
                     },
                     "required": [
